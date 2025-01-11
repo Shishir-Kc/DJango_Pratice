@@ -21,5 +21,9 @@ class UserProfile(models.Model):
     user_bio = models.TextField(max_length=99)
     profile_created_at = models.DateTimeField(auto_now_add=True)
     profile_updated_at = models.DateTimeField(auto_now=True)
+    user_nick_name = models.CharField(max_length=20,default= 'User')
 
-    
+    def __str__(self):
+        time = str(self.profile_updated_at)
+        return self.user_nick_name + '`s Profile ' + time
+
