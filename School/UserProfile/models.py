@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class UserProfile(models.Model):
+class UserAccount(models.Model):
     user_name = models.CharField(max_length=100)
     user_email = models.EmailField()
     user_password = models.CharField(max_length=100)
@@ -15,3 +15,11 @@ class UserProfile(models.Model):
 
     class Meta:
         verbose_name_plural = 'User Account'
+
+class UserProfile(models.Model):
+    user_account = models.OneToOneField(UserAccount,on_delete=models.CASCADE)
+    user_bio = models.TextField(max_length=99)
+    profile_created_at = models.DateTimeField(auto_now_add=True)
+    profile_updated_at = models.DateTimeField(auto_now=True)
+
+    
