@@ -8,7 +8,7 @@ class UserProfile(models.Model):
     user_phone = models.CharField(max_length=10)
     user_address = models.TextField()
     user_dob = models.DateField()
-    user_profile_pic = models.ImageField(upload_to='UserProfile/ProfilePic/')
+    user_profile_pic = models.ImageField(upload_to='UserProfile/ProfilePic/',blank=True)
 
     def __str__(self):
         return self.user_name
