@@ -27,3 +27,15 @@ class UserProfile(models.Model):
         time = str(self.profile_updated_at)
         return self.user_nick_name + '`s Profile ' + time
 
+class School_class(models.Model):
+    students = models.ManyToManyField(UserAccount)
+    class_name = models.CharField(max_length=20)
+    class_teacher= models.CharField(max_length=20)
+    class_number = models.IntegerField()
+
+    class Meta:
+        verbose_name_plural = 'School Class'
+
+
+    def __str__(self):
+        return "class => " + self.class_name+ " | Room Number = > " + str(self.class_number)   
