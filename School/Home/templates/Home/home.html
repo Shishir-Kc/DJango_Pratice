@@ -6,11 +6,18 @@
     <title> Home </title>
 </head>
 <body>
-    {% for Notic in Notices%}
-        <ul>
-        <li>  {{Notic.Topic}} </li>
+    {% if Notices%}
+     {% for Notic in Notices%}
+         <ul>
+         <li>  {{Notic.Topic}} id = > {{Notic.id}}</li>
 
-        </ul>
-    {% endfor %}
+         </ul>
+     {% endfor %}
+    {% else %}
+        <h1> No Notices Found </h1>
+        <a href="{% url 'Home:notice_add' %}"> Add Notice </a>
+    {% endif %}
+
+
 </body>
 </html>
