@@ -29,3 +29,7 @@ class NoticeAdd(CreateView):
     template_name = 'Home/notice_form.html'
     fields = ['Topic','News','image']
     success_url = reverse_lazy('Home:notice')
+
+
+class USER_LOGIN(TemplateView):
+    template_name = 'Home/login.html'

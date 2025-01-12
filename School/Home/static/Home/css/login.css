@@ -1,0 +1,159 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    height: 100vh;
+    background-color: rgb(233, 240, 247);
+    font-family: Arial, sans-serif;
+    
+}
+
+
+.logo{
+    /* border: 2px solid rgb(136, 136, 141); */
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-image: url('Home/image/clzlogo.png');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    display: flex;
+}
+
+h1 {
+    color: rgb(24, 119, 242);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 50px;
+    font-style: italic;
+}
+
+h2 {
+    color: rgb(14, 13, 13);
+    text-decoration: underline;
+}
+
+
+
+.login {
+    width: 980px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 586px;
+    border-radius: 3%;
+    transform: translate(-50%, -50%);
+}
+
+.header{
+    width: 55vw;
+    height: 10vw;
+    position: absolute;
+    top: 0%;
+    left: 24%;
+    
+    
+
+}
+
+
+.header h1 {
+    font-size: 3vw; 
+}
+
+.header h2 {
+    font-size: 1.5vw; 
+}
+
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 5vw;
+    }
+
+    .header h2 {
+        font-size: 3vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 6vw; 
+    }
+
+    .header h2 {
+        font-size: 4vw;
+    }
+}
+
+
+
+.credientials {
+    position: relative;
+    top: 70px;
+    left: 30%;
+    border: 2px solid rgb(136, 136, 141);
+    width: 400px;
+    height: 400px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+
+.ced {
+    border-radius: 10px;
+    text-align: left;
+    margin: 10px auto;
+    display: block;
+    width: 75%;
+    height: 40px;
+}
+
+.log-in {
+    background-color: rgb(24, 119, 242);
+    width: 80%;
+    height: 40px;
+    margin: 20px auto;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    font-size: medium;
+    border-radius: 12px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.pass {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none;
+    color: rgb(24, 119, 242);
+}
+
+.creat-acc {
+    display: block;
+    margin: 20px auto;
+    width: 60%;
+    height: 40px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: green;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.gap {
+    height: 1px;
+}

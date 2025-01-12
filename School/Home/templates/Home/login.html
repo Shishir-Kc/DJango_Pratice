@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'Home/css/login.css' %}">
+    <title>Login</title>
+</head>
+<body>
+
+
+    <div class="logo">   
+
+    </div>
+
+    <div class = "header">
+        <h1>SHREE RASTRIYA MAVI SECONDARY COLLAGE</h1> <br>
+        <h2>It is a leading government institution, providing education from PG to grade 12 and DCE & pre-DCE.</h2>
+        
+    </div>
+    
+    <div class="login">
+    
+        
+
+        <form method="post" action="#">
+       
+            <div class="credientials">
+                <input class="ced" type="text" placeholder="User-name or Email" required> <br>
+                <div class="gap"></div>
+                <input class="ced" type="password" placeholder="Password" required> <br>
+                <input class="log-in" type="submit" value="Log In"><br>
+                <a href="#" class="pass">Forgot password?</a><br>
+                <input class="creat-acc" type="submit" value="Register account">
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>
