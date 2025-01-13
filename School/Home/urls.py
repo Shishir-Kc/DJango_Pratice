@@ -10,7 +10,7 @@ urlpatterns = [
     path('notice/<int:pk>',views.NoticeDetail.as_view(),name='notice_detail'),
     path('notice/delete/<int:pk>',views.NoticeDelete.as_view(),name='notice_delete'),
     path('notice/add/',views.NoticeAdd.as_view(),name='notice_add'),
-    path('login/',views.USER_LOGIN.as_view(),name='login'),
+    path('login/',views.USER_LOGIN,name='login'),
     path('test/',views.AddUser,name='test'),
     
 ]
