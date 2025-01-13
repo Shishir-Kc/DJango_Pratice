@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from . import models
 from django.views.generic import TemplateView , ListView ,CreateView, DetailView ,DeleteView
 from django.urls import reverse_lazy
+from . import forms
 
 class Notice(ListView):
     model = models.Notice
@@ -33,3 +34,22 @@ class NoticeAdd(CreateView):
 
 class USER_LOGIN(TemplateView):
     template_name = 'Home/login.html'
+
+
+def AddUser(request):
+    if request.method == 'POST':
+        form =  forms.StudentFrom(request.POST)
+        if form.is_valid():
+            print('Form is valid')
+            return HttpResponse("valid")
+        else:
+            print('Form is not valid')
+            return HttpResponse("valid")
+
+    else:
+        context = {
+                "form":forms.StudentFrom()
+            }
+
+
+        return render(request,'Home/test.html',context)
