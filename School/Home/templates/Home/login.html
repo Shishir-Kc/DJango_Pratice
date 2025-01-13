@@ -25,11 +25,11 @@
         
 
         <form method="post" action="#">
-       
+            {% csrf_token %}
             <div class="credientials">
-                <input class="ced" type="text" placeholder="User-name or Email" required> <br>
+                <input class="ced" type="text" placeholder="User-name or Email"  name= "user_name"required> <br>
                 <div class="gap"></div>
-                <input class="ced" type="password" placeholder="Password" required> <br>
+                <input class="ced" type="password" placeholder="Password" name= "user_pass" required> <br>
                 <input class="log-in" type="submit" value="Log In"><br>
                 <a href="#" class="pass">Forgot password?</a><br>
                 <input class="creat-acc" type="submit" value="Register account">
