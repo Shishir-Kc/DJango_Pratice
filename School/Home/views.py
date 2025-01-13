@@ -31,17 +31,28 @@ class NoticeAdd(CreateView):
     fields = ['Topic','News','image']
     success_url = reverse_lazy('Home:notice')
 
-
-class USER_LOGIN(TemplateView):
-    template_name = 'Home/login.html'
-
-
+def USER_LOGIN(request):
+    if request.method == "POST":
+        user_name = request.POST.get("user_name")
+        user_pass = request.POST.get("user_pass")
+        if user_name == 'admin' and user_pass == 'admin':
+            return HttpResponse("Login Success")
+        else:
+            return HttpResponse("Login Failed")
+    else:
+        return render(request,'Home/login.html') 
+    
+    
 def AddUser(request):
     if request.method == 'POST':
         form =  forms.StudentFrom(request.POST)
         if form.is_valid():
             print('Form is valid')
+            data = form.cleaned_data
+            print(request.POST.get("user_name"))
+            print(request.POST.get("user_pass"))
             return HttpResponse("valid")
+        
         else:
             print('Form is not valid')
             return HttpResponse("valid")
