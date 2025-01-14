@@ -58,7 +58,7 @@ def USER_LOGIN(request):
         user = authenticate(request,username=user_name,password=user_pass)
         if user is not None:
             login(request,user)
-            return redirect('Home:notice')
+            return redirect('Home:home')
         
     else:
         return render(request,'Home/login.html')
