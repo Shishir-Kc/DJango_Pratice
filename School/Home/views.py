@@ -77,3 +77,24 @@ def AddUser(request):
 def user_logout(request):
     logout(request)
     return redirect('Home:login')
+
+@login_required
+def update_notice(request,notice_id):
+    if request.method == "POST":
+        id = request.POST.get('notice_id')
+        updated_topic = request.POST.get('topic_name')
+        updated_news = request.POST.get('news')
+        data = models.Notice.objects.get(id=id)
+        data.Topic = updated_topic
+        data.News = updated_news
+        data.save()
+        return redirect('Home:home')
+
+    else:
+        data = models.Notice.objects.get(id=notice_id)
+        context = {
+            'Notice':data
+        }
+        return render(request,'Home/update.html',context)
+    
+

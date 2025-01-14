@@ -12,5 +12,6 @@ urlpatterns = [
     path('login/',views.USER_LOGIN,name='login'),
     path('test/',views.AddUser,name='test'),
     path("logout/",views.user_logout,name='logout'),
+    path('notice/update/<int:notice_id>',views.update_notice,name='update_notice'),
     
 ]
