@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 def Home(request):
     notice = models.Notice.objects.filter(user=request.user)
-    context = {
+    context =  {
         'Notices':notice,
         'user':request.user
     }
@@ -36,17 +36,15 @@ class NoticeDelete(DeleteView):
 @login_required
 def NoticeAdd(request):
     if request.method == "POST":
-      topic = request.POST.get("topic_name")       
-      news = request.POST.get("news")
-      update = models.Notice(Topic = topic,News = news)
-      update.save()
-      context = {
-          'user':request.user
-      }
-      return redirect('Home:notice',context)        
+        data_topic = request.POST.get("topic_name")
+        data_news = request.POST.get("news")
+        data = models.Notice(user=request.user,Topic=data_topic,News=data_news)
+        data.save()
+        return redirect('Home:home')
+    
     else:
-        
         return render(request,'Home/notice_form.html')
+
 
 
 
