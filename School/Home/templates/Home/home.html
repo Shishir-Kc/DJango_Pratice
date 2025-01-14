@@ -8,10 +8,16 @@
 <body>
     {{user}}
     {% if Notices%}
+        <form action="{% url 'Home:search' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="search" placeholder="Search">
+            <input type="submit" value="search">
+        </form>
+
      {% for Notic in Notices%}
          <ul>
          <li>  {{Notic.Topic}} id = > {{Notic.id}}</li>
-         <a href="{% url 'Home:update_notice' Notic.id %}"> Update Notice </a>
+         <a href="{% url 'Home:notice_detail' Notic.id %}"> View More </a>
 
          </ul>
      {% endfor %}
@@ -20,7 +26,9 @@
         <a href="{% url 'Home:notice_add' %}"> Add Notice </a>
     {% endif %}
 
-    <a href="{% url 'Home:logout' %}"> logout </a>
+    <a href="{% url 'Home:logout' %}"> logout </a> <br>
+    
+    <a href="{% url 'Home:notice_add' %}"> Add Notice </a>
 
 </body>
 </html>
