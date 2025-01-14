@@ -6,10 +6,14 @@
     <title> Topic</title>
 </head>
 <body>
-        <h1> Topic = > </h1>
-            <h2> UPloaded date = > </h2>
-        <p> News = >  </p>
+        <h1> Topic = > {{Notice.Topic}}</h1>
+    <!-- date_uploaded = models.DateTimeField(auto_now_add=True) -->
+            <h2> UPloaded date = > {{Notice.date_uploaded}}</h2>
+        <p> News = >  {{Notice.News}}</p>
+        <a href="{% url 'Home:update_notice' Notice.id %}"> Change Notice </a> <br>
+        <a href="{% url 'Home:home'  %}"> back </a> <br>
 
+        <a href="{% url 'Home:delete_notice' Notice.id %}"> Delete Notice </a>
 
 </body>
 </html>

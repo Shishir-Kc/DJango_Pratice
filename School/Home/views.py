@@ -11,20 +11,22 @@ from django.contrib.auth.decorators import login_required
 
 
 def Home(request):
-    
-    # if "search" in request.session:
-    #     search_keyword = request.session['search']
-    #     notice = models.Notice.objects.filter(Topic__icontains=search_keyword)
-    #     context =  {
-    #         'Notices':notice,
-    #         'user':request.user
-    #     }
-    
-    notice = models.Notice.objects.filter(user=request.user)
-    context =  {
-        'Notices':notice,
-        'user':request.user
-    }
+    search_keyword = request.session.get('search', '')
+    if search_keyword:
+        search_keyword = search_keyword.strip()
+        notice = models.Notice.objects.filter(Topic__icontains=search_keyword).filter(user=request.user)
+        context =  {
+            'Notices':notice,
+            'user':request.user
+        }
+        request.session['search'] = ""
+        
+    else:
+        notice = models.Notice.objects.filter(user=request.user)
+        context =  {
+            'Notices':notice,
+            'user':request.user
+        }
     return render(request,'Home/home.html',context)
 
 class NoticeDetail(DetailView):
@@ -121,5 +123,5 @@ def delete_notice(request,notice_id):
 
 @login_required
 def search(request):
-    request.session['search'] = request.GET.get('search')
+    request.session['search'] = request.GET.get('search_keyword')
     return redirect('Home:home')

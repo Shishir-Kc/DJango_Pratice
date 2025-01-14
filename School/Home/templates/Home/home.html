@@ -8,9 +8,9 @@
 <body>
     {{user}}
     {% if Notices%}
-        <form action="{% url 'Home:search' %}" method="POST">
+        <form action="{% url 'Home:search' %}">
             {% csrf_token %}
-            <input type="text" name="search" placeholder="Search">
+            <input type="text" name="search_keyword" placeholder="Search">
             <input type="submit" value="search">
         </form>
 
