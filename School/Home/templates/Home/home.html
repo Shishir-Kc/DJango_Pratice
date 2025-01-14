@@ -11,6 +11,7 @@
      {% for Notic in Notices%}
          <ul>
          <li>  {{Notic.Topic}} id = > {{Notic.id}}</li>
+         <a href="{% url 'Home:update_notice' Notic.id %}"> Update Notice </a>
 
          </ul>
      {% endfor %}
