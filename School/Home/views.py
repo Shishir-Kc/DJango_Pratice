@@ -1,14 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from . import models
 from django.views.generic import TemplateView , ListView ,CreateView, DetailView ,DeleteView
 from django.urls import reverse_lazy
 from . import forms
+from . import models
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
-class Notice(ListView):
-    model = models.Notice
-    template_name = 'Home/home.html'
-    context_object_name = 'Notices'
+
+
+def Home(request):
+    notice = models.Notice.objects.filter(user=request.user)
+    context = {
+        'Notices':notice,
+        'user':request.user
+    }
+    return render(request,'Home/home.html',context)
 
 class NoticeDetail(DetailView):
     template_name = 'Home/noticeDetail.html'
@@ -24,43 +33,49 @@ class NoticeDelete(DeleteView):
     template_name = 'Home/notice_confirm_delete.html'
     success_url = reverse_lazy('Home:notice')
 
+@login_required
+def NoticeAdd(request):
+    if request.method == "POST":
+      topic = request.POST.get("topic_name")       
+      news = request.POST.get("news")
+      update = models.Notice(Topic = topic,News = news)
+      update.save()
+      context = {
+          'user':request.user
+      }
+      return redirect('Home:notice',context)        
+    else:
+        
+        return render(request,'Home/notice_form.html')
 
-class NoticeAdd(CreateView):
-    model = models.Notice
-    template_name = 'Home/notice_form.html'
-    fields = ['Topic','News','image']
-    success_url = reverse_lazy('Home:notice')
+
+
 
 def USER_LOGIN(request):
     if request.method == "POST":
         user_name = request.POST.get("user_name")
         user_pass = request.POST.get("user_pass")
-        if user_name == 'admin' and user_pass == 'admin':
-            return HttpResponse("Login Success")
-        else:
-            return HttpResponse("Login Failed")
-    else:
-        return render(request,'Home/login.html') 
-    
-    
-def AddUser(request):
-    if request.method == 'POST':
-        form =  forms.StudentFrom(request.POST)
-        if form.is_valid():
-            print('Form is valid')
-            data = form.cleaned_data
-            print(request.POST.get("user_name"))
-            print(request.POST.get("user_pass"))
-            return HttpResponse("valid")
+        user = authenticate(request,username=user_name,password=user_pass)
+        if user is not None:
+            login(request,user)
+            return redirect('Home:notice')
         
-        else:
-            print('Form is not valid')
-            return HttpResponse("valid")
-
     else:
-        context = {
-                "form":forms.StudentFrom()
-            }
+        return render(request,'Home/login.html')
+    
+@login_required
+def AddUser(request):
+    if request.method == "POST":
+        user_name = request.POST.get("user_name")
+        user_pass = request.POST.get("user_pass")
+        user = User.objects.create_user(username=user_name,password=user_pass)
+        user.save()
+        return redirect('Home:login')
+    else:
+        return render(request,'Home/base.html')
+    
 
-
-        return render(request,'Home/test.html',context)
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('Home:login')
