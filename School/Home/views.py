@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from . import models
 from django.views.generic import TemplateView , ListView ,CreateView, DetailView ,DeleteView
 from django.urls import reverse_lazy
-from . import forms
 from . import models
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
@@ -12,6 +11,15 @@ from django.contrib.auth.decorators import login_required
 
 
 def Home(request):
+    
+    # if "search" in request.session:
+    #     search_keyword = request.session['search']
+    #     notice = models.Notice.objects.filter(Topic__icontains=search_keyword)
+    #     context =  {
+    #         'Notices':notice,
+    #         'user':request.user
+    #     }
+    
     notice = models.Notice.objects.filter(user=request.user)
     context =  {
         'Notices':notice,
@@ -27,11 +35,7 @@ class NoticeDetail(DetailView):
 
 
 
-class NoticeDelete(DeleteView):
-    model = models.Notice
-    context_object_name = 'Notice'
-    template_name = 'Home/notice_confirm_delete.html'
-    success_url = reverse_lazy('Home:notice')
+
 
 @login_required
 def NoticeAdd(request):
@@ -97,4 +101,25 @@ def update_notice(request,notice_id):
         }
         return render(request,'Home/update.html',context)
     
+@login_required
+def notice_detail(request,notice_id):
+    if request.method =="POST":
+        pass
+    else:
+        data = models.Notice.objects.get(id=notice_id)
+        context = {
+            'Notice':data
+        }
+        return render(request,'Home/detail.html',context)
 
+@login_required
+def delete_notice(request,notice_id):
+    data = models.Notice.objects.get(id=notice_id)
+    data.delete()
+    return redirect('Home:home')
+
+
+@login_required
+def search(request):
+    request.session['search'] = request.GET.get('search')
+    return redirect('Home:home')
