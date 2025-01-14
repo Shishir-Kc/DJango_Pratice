@@ -6,6 +6,7 @@
     <title> Home </title>
 </head>
 <body>
+    {{user}}
     {% if Notices%}
      {% for Notic in Notices%}
          <ul>
@@ -18,6 +19,7 @@
         <a href="{% url 'Home:notice_add' %}"> Add Notice </a>
     {% endif %}
 
+    <a href="{% url 'Home:logout' %}"> logout </a>
 
 </body>
 </html>
